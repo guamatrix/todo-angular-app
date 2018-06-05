@@ -1,16 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { reducers } from './app.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule
+    CoreModule,
+    StoreModule.forRoot(reducers)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
+  providers   : []
 })
 export class AppModule { }
