@@ -7,18 +7,21 @@ import { AuthAccessModel, Token } from '../shared/models/interfaces';
 import { State } from '../shared/models/States';
 import { SetLoading, SetAuth } from '../shared/store/shared.actions';
 import { User } from '../shared/models/interfaces';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  URL_BASE = 'http://localhost:3000';
+  URL_BASE = environment.BASE_URL;
   constructor( private http: HttpClient, private store: Store<State>) {}
 
   registerUser(credentials: AuthAccessModel) {
-    return this.http.post(`${this.URL_BASE}/users`, credentials, { observe: 'response' });
+    const url = `${this.URL_BASE}/users`;
+    return this.http.post(url, credentials, { observe: 'response' });
   }
 
   login(credentials: AuthAccessModel) {
-    return this.http.post(`${this.URL_BASE}/users/login`, credentials);
+    const url = `${this.URL_BASE}/users/login`;
+    return this.http.post(url, credentials);
   }
 
 
