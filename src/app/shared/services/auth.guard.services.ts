@@ -7,7 +7,7 @@ import { getIsAuth } from '../../app.reducer';
 import { take, map } from 'rxjs/operators';
 
 const isLogin = (url) => {
-  return url.search('login') === 1;
+  return url.search('login') === 1 || url.search('signup') === 1;
 };
 
 @Injectable()
@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.store.pipe(select(getIsAuth), map((isAuth: boolean) => {
       const isRouteLogin = isLogin(state.url);
+
       if (isRouteLogin && isAuth) {
         this.router.navigate(['home']);
         return false;

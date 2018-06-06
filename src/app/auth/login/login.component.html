@@ -1,7 +1,7 @@
 <nz-layout style="height: 100%" nz-row nz-row nzType="flex" nzJustify="center" nzAlign="middle">
   <nz-card  class="botton-form"nz-col nzSpan="20" nzSm="14" nzMd="12" nzLg="8">
     <div nz-row nzType="flex" nzJustify="center">
-      <h2>Login/Signup</h2>
+      <h2>{{ isLogin ? 'Login' : 'Signup' }}</h2>
     </div>
     <form class="form-auth" (ngSubmit)="onSubmit()" nz-form [formGroup]="authForm">
       <nz-form-item *ngFor="let field of FIELDS">
@@ -19,13 +19,13 @@
             <label nz-checkbox formControlName="remember">
               <span>Remember me</span>
             </label>
-             <a>Forgot password!</a>
+             <a *ngIf="isLogin">Forgot password!</a>
           </div>
           <div nz-row>
-              <button [disabled]="authForm.invalid" [nzLoading]="loading | async" class="auth-btn" nz-button nzType="primary">Log In</button>
+              <button [disabled]="authForm.invalid" [nzLoading]="loading | async" class="auth-btn" nz-button nzType="primary">{{ isLogin ? 'Login' : 'Signup' }}</button>
           </div>
           <div nz-row nzType="flex" nzJustify="center">
-            <a rol="button" (click)="onSubmit(1)">Or Register now!</a>
+            <a rol="button" (click)="onChangeAccessMode()">Or {{ isLogin ? 'Register now!' : 'Login!' }}</a>
           </div>
         </nz-form-control>
       </nz-form-item>

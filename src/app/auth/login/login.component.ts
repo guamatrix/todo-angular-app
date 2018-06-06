@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthAccessModel } from '../../shared/models/interfaces';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { State } from '../../shared/models/States';
@@ -23,12 +24,21 @@ export class LoginComponent implements OnInit, OnDestroy {
   loading: Observable<boolean>;
   error: string;
   observable$: Observable<any>;
-  subs: Subscription;
+  subs: Subscription[] = [];
+  isLogin: boolean;
 
   constructor(private authServices: AuthService,
-    private store: Store<State>) { }
+    private store: Store<State>,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    this.subs.push(this.route.url.subscribe(
+      url => {
+        this.isLogin = url[0].path === 'login';
+      }
+    ));
+
     this.initForm();
     this.loading = this.store.pipe(select(getIsLoading));
   }
@@ -41,26 +51,31 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit(option = 0) {
+  onSubmit() {
     if (!this.authForm.invalid) {
       const credentials: AuthAccessModel = this.authForm.value;
-      if (option) {
+      if (!this.isLogin) {
         this.observable$ = this.authServices.registerUser(credentials);
       } else {
         this.observable$ = this.authServices.login(credentials);
       }
-      this.subs = this.observable$.subscribe(
+      this.subs.push(this.observable$.subscribe(
         resp => {
           this.authServices.manageAccess(resp);
         }, ({ error }) => {
           this.authForm.get('email').setErrors({ email: true });
           this.error = error.errors;
         }
-      );
+      ));
     }
   }
 
+  onChangeAccessMode() {
+    const url = this.isLogin ? 'signup' : 'login';
+    this.router.navigate([url]);
+  }
+
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 }

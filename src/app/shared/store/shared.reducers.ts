@@ -20,5 +20,5 @@ export function sharedReducer(state = initialState, action: Actions.SharedAction
 }
 
 export const isLoading = (state: SharedState) => state.loading;
-export const isAuth = (state: SharedState) => state.auth === null;
+export const isAuth = (state: SharedState) => state.auth !== null;
 export const getUser = (state: SharedState) => state.auth;
