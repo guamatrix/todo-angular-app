@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from '../auth/login/login.component';
-import { AuthGuard } from '../shared/services/auth.guard.services';
+import { SignGuard } from '../auth/services/sign.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'signup', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [SignGuard]  },
+  { path: 'signup', component: LoginComponent, canActivate: [SignGuard] },
   { path: '**', redirectTo: 'login' }
 ];
 
@@ -17,7 +15,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [SignGuard]
 })
 
 export class CoreRoutingModule {}

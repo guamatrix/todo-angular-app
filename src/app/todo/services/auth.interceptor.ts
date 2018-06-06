@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { take, switchMap } from 'rxjs/operators';
-import { State } from '../models/States';
+import { State } from '../../shared/models/States';
 import { getUser } from '../../app.reducer';
-import { User } from '../models/interfaces';
+import { User } from '../../shared/models/interfaces';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

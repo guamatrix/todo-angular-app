@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { AuthAccessModel, Token } from '../shared/models/interfaces';
-import { State } from '../shared/models/States';
-import { SetLoading, SetAuth } from '../shared/store/shared.actions';
-import { User } from '../shared/models/interfaces';
-import { environment } from '../../environments/environment';
+import { AuthAccessModel, Token } from '../../shared/models/interfaces';
+import { State } from '../../shared/models/States';
+import { SetLoading, SetAuth } from '../../shared/store/shared.actions';
+import { User } from '../../shared/models/interfaces';
+import { environment } from '../../../environments/environment';
 
 const URL_BASE = environment.BASE_URL;
 
@@ -33,7 +33,7 @@ export class AuthService {
     user.token = this.generateTokenByHeaders(response.headers);
     console.log(user);
     this.store.dispatch(new SetAuth(user));
-    this.route.navigate(['home']);
+    this.route.navigate(['home/todo']);
   }
 
   private generateTokenByHeaders(headers): Token {

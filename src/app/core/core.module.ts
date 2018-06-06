@@ -7,13 +7,12 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 registerLocaleData(en);
 import { NZ_I18N, en_US } from 'ng-zorro-antd';
-import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
-import { AuthService } from '../auth/auth.service';
-import { AuthInterceptor } from '../shared/services/auth.interceptor';
+import { AuthService } from '../auth/services/auth.service';
 import { LoadingInterceptor } from '../shared/services/loading.interceptor';
 import { CoreRoutingModule } from './core-routing.module';
+import { TodoModule } from '../todo/todo.module';
 
 const MODULE = [
   BrowserModule,
@@ -21,21 +20,16 @@ const MODULE = [
   BrowserAnimationsModule,
   SharedModule,
   AuthModule,
-  CoreRoutingModule
-];
-
-const COMPONENTS = [
-  HomeComponent
+  TodoModule,
+  CoreRoutingModule,
 ];
 
 @NgModule({
-  declarations: [COMPONENTS],
+  declarations: [],
   imports: [MODULE],
-  exports: [COMPONENTS, MODULE],
+  exports: [MODULE],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthService
   ]
 })

@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { State } from '../../shared/models/States';
 import { getIsLoading } from '../../app.reducer';
 
