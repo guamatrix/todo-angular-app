@@ -17,8 +17,7 @@ const MODULE = [
   imports: [MODULE, NgZorroAntdModule.forRoot()],
   exports: [MODULE, NgZorroAntdModule, ErrorsPipe],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ]
 })
 

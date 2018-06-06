@@ -62,9 +62,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.subs.push(this.observable$.subscribe(
         resp => {
           this.authServices.manageAccess(resp);
-        }, ({ error }) => {
+        }, error => {
           this.authForm.get('email').setErrors({ email: true });
-          this.error = error.errors;
+          this.error = error.error ? error.error.errors : error;
         }
       ));
     }
