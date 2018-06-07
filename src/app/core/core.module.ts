@@ -12,7 +12,7 @@ import { AuthModule } from '../auth/auth.module';
 import { AuthService } from '../auth/services/auth.service';
 import { LoadingInterceptor } from '../shared/services/loading.interceptor';
 import { CoreRoutingModule } from './core-routing.module';
-import { TodoModule } from '../todo/todo.module';
+import { TodoModule } from '../todos/todos.module';
 
 const MODULE = [
   BrowserModule,
