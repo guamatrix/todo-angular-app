@@ -17,10 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(public router: Router) {
     this.subs.push(
-      router.events
-        .pipe(
-          filter(event => event instanceof NavigationEnd))
-        .subscribe((event: NavigationEnd) => {
+      router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         this.urlPaths = event.url.slice(1).split('/');
         console.log(this.urlPaths);
       })

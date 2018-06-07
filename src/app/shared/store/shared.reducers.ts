@@ -1,10 +1,11 @@
 import * as Actions from './shared.actions';
 
 import { SharedState } from '../models/States';
+import { LocalStorage } from './LocalStorage';
 
 const initialState: SharedState = {
   loading: false,
-  auth: null
+  auth: LocalStorage.loadAuth()
 };
 
 export function sharedReducer(state = initialState, action: Actions.SharedActions) {
@@ -13,6 +14,7 @@ export function sharedReducer(state = initialState, action: Actions.SharedAction
       return { ...state, loading: action.payload };
 
     case Actions.SET_AUTH:
+      LocalStorage.saveAuth(action.payload);
       return { ...state, auth: action.payload };
     default:
       return state;
