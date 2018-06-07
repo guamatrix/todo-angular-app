@@ -31,13 +31,24 @@ export class AuthService {
   manageAccess(response: HttpResponse<any>) {
     const user: User = response.body;
     user.token = this.generateTokenByHeaders(response.headers);
-    console.log(user);
     this.store.dispatch(new SetAuth(user));
-    this.route.navigate(['home/todo']);
+    this.route.navigate(['home/todos']);
   }
 
   private generateTokenByHeaders(headers): Token {
     return { 'x-auth': headers.get('x-auth') };
+  }
+
+  logout() {
+    const url = `${URL_BASE}/users/me/token`;
+    this.http.delete(url).pipe(take(1)).subscribe(
+      resp => {
+        this.store.dispatch(new SetAuth(null));
+        this.route.navigate(['login']);
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }

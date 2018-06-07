@@ -3,22 +3,21 @@
     <div class="logo">
     </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu>
-        <span title><i class="anticon anticon-user"></i><span class="nav-text">User</span></span>
-        <ul>
-          <li nz-menu-item>My Info</li>
-          <li nz-menu-item>Change Pass</li>
-          <li nz-menu-item>Logout</li>
+      <li *ngFor="let menu of menuList" nz-submenu [nzOpen]="true">
+        <span title><i [class]="menu.icon"></i><span class="nav-text">{{ menu.title }}</span></span>
+
+        <ul *ngFor="let childMenu of menu.child">
+
+          <li *ngIf="!childMenu.link" (click)="childMenu.onClick ? childMenu.onClick() : false" nz-menu-item>{{ childMenu.title }}</li>
+          <li *ngIf="childMenu.link"
+            routerLinkActive="ant-menu-item-selected"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="childMenu.link"
+            nz-menu-item>
+              {{ childMenu.title }}
+            </li>
         </ul>
       </li>
-      <li nz-submenu>
-        <span title><i class="anticon anticon-team"></i><span class="nav-text">Team</span></span>
-        <ul>
-          <li nz-menu-item>Team 1</li>
-          <li nz-menu-item>Team 2</li>
-        </ul>
-      </li>
-      <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">Todos</span></span></li>
     </ul>
   </nz-sider>
   <nz-layout>

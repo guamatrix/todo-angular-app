@@ -8,8 +8,8 @@ import { TodoResolver } from './services/todo.resolver.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-    { path: 'todo', component: TodoComponent, resolve: { todos: TodoResolver } },
-    { path: 'todo/new', component: TodoformComponent }
+    { path: 'todos', component: TodoComponent, resolve: { todos: TodoResolver } },
+    { path: 'todos/new', component: TodoformComponent }
   ]}
 ];
 

@@ -16,11 +16,14 @@ export class LocalStorage {
   }
 
   static saveAuth(user: User) {
+    if (!user) {
+      return localStorage.clear();
+    }
     try {
       const serializeAuth = JSON.stringify(user);
       localStorage.setItem('auth', serializeAuth);
     } catch (error) {
-      console.log(error);
+      console.log('local storage not available', error);
     }
   }
 }
