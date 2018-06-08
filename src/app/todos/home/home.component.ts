@@ -11,13 +11,13 @@ import { AuthService } from '../../auth/services/auth.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   menuList = [
-    { id: 1, title: 'User', icon: 'anticon anticon-user', child: [
+    { id: 'user', title: 'User', icon: 'anticon anticon-user', child: [
         { title: 'My Info', onClick: null },
         { title: 'Change Pass', onClick: null },
         { title: 'Logout', onClick: this.onLogout.bind(this) }
       ]
     },
-    { id: 2, title: 'Todos', icon: 'anticon anticon-file', child: [
+    { id: 'todos', title: 'Todos', icon: 'anticon anticon-file', child: [
       { title: 'My Todos', link: 'todos' },
       { title: 'New Todos', link: 'todos/new' },
     ]

@@ -9,11 +9,13 @@ export class TodoResolver implements Resolve<any> {
     private router: Router) {}
 
   async resolve()  {
+    // debugger;
     try {
-      const todos = await this.http.get('http://localhost:3000/todos').toPromise();
+      const todos = await this.http.get('http://localhost:3000/todos', { observe: 'response' }).toPromise();
       return todos;
     } catch (error) {
-      this.router.navigate(['login']);
+      console.log(error);
+      // this.router.navigate(['login']);
     }
   }
 }

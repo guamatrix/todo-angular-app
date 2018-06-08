@@ -7,9 +7,9 @@ import { AuthGuard } from './services/auth.guard.services';
 import { TodoResolver } from './services/todo.resolver.service';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-    { path: 'todos', component: TodoComponent, resolve: { todos: TodoResolver } },
-    { path: 'todos/new', component: TodoformComponent }
+  { path: '', component: HomeComponent, canActivate: [AuthGuard], resolve: { todos: TodoResolver }, children: [
+    { path: 'home/todos', component: TodoComponent },
+    { path: 'home/todos/new', component: TodoformComponent }
   ]}
 ];
 

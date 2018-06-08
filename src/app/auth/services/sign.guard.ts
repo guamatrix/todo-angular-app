@@ -14,7 +14,7 @@ export class SignGuard implements CanActivate {
     return this.store.pipe(select(getIsAuth), map((isAuth: boolean) => {
 
       if (isAuth) {
-        this.router.navigate(['home']);
+        this.router.navigate(['home/todos']);
         return false;
       }
 

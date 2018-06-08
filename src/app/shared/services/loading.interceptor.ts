@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpEvent, HttpHandler, HttpResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 import { State } from '../models/States';
@@ -21,6 +21,7 @@ export class LoadingInterceptor implements HttpInterceptor {
         }
       },
       error => {
+        // renewtoken
         this.store.dispatch(new SetLoading(false));
       }
     ));
