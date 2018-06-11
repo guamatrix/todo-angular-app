@@ -1,4 +1,4 @@
-<nz-table #nzTable [nzData]="todos" nzBordered nzPageSize="10" [nzScroll]="{ y: '640px'}">
+<nz-table #nzTable [nzData]="todos" nzBordered nzPageSize="100" [nzScroll]="{ y: '640px'}">
     <thead>
       <tr>
         <th nzWidth="60%">Todo</th>
@@ -13,11 +13,11 @@
         <td> {{ todo.completed}} </td>
         <td> {{ todo.completedAt | date }} </td>
         <td class="icons">
-          <nz-popconfirm  *ngIf="!todo.completed" nzTitle="Sure to complete?" (nzOnConfirm)="completeTodo(todo._id, i)">
-            <a nz-popconfirm><i class="anticon anticon-check-circle-o"></i></a>
+          <nz-popconfirm *ngIf="!todo.completed" nzTitle="Sure to complete?" (nzOnConfirm)="completeTodo(todo._id, i)">
+            <a nz-popconfirm><i nzTitle="prompt text" class="anticon anticon-check-circle-o"></i></a>
           </nz-popconfirm>
           <nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="deleteTodo(todo._id, i)">
-              <a nz-popconfirm><i  role="button" class="anticon anticon-delete"></i></a>
+              <a nzTitle="prompt text" nz-popconfirm><i  role="button" class="anticon anticon-delete"></i></a>
           </nz-popconfirm>
         </td>
       </tr>

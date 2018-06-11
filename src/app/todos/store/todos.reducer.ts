@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import _ from 'lodash';
 
 import * as Actions from './todos.acttions';
 import { State, TodosState } from '../models/state';
@@ -40,6 +41,6 @@ export function todosReducer(state = initialState, action: Actions.TodosActions)
 }
 
 export const getTodosState = createFeatureSelector<State>('todosState');
-export const getTodos = createSelector(getTodosState, (state: State) => state.todos);
+export const getTodos = createSelector(getTodosState, (state: State) => _.orderBy(state.todos, ['_id'], ['desc']));
 export const getSelectedTodos = createSelector(getTodosState, (state: State) => state.selectedTodos);
 export const isSelectedTodos = createSelector(getTodosState, (state: State) => state.selectedTodos !== -1);
