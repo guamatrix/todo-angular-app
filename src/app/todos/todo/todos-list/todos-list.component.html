@@ -1,16 +1,22 @@
-<nz-table #nzTable [nzData]="todos" nzPageSize="10" [nzScroll]="{ y: '640px'}">
+<nz-table #nzTable [nzData]="todos" nzBordered nzPageSize="10" [nzScroll]="{ y: '640px'}">
     <thead>
       <tr>
-        <th nzWidth="500px">Todo</th>
-        <th nzWidth="200px">Completed</th>
-        <th nzWidth="200px">Completed At</th>
+        <th nzWidth="60%">Todo</th>
+        <th nzWidth="15%">Completed</th>
+        <th nzWidth="15%">Completed At</th>
+        <th nzWidth="10%">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let todo of nzTable.data">
-        <td>{{ todo.text }}</td>
+      <tr *ngFor="let todo of nzTable.data; let i = index">
+        <td><app-todo-edit-row [todo]="todo" [index]="i" name="text"></app-todo-edit-row></td>
         <td> {{ todo.completed}} </td>
         <td> {{ todo.competedAt }} </td>
+        <td>
+          <nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="deleteTodo()">
+            <a nz-popconfirm>Delete</a>
+          </nz-popconfirm>
+        </td>
       </tr>
     </tbody>
   </nz-table>

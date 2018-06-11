@@ -13,5 +13,8 @@ export class TodosListComponent implements OnInit {
   ngOnInit() {
 
   }
+  deleteTodo() {
+
+  }
 
 }

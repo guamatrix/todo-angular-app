@@ -24,7 +24,7 @@ export function todosReducer(state = initialState, action: Actions.TodosActions)
     case Actions.UPDATE_TODOS:
       const todosToUpdate = [ ...state.todos ];
       todosToUpdate[state.selectedTodos] = action.payload;
-      return { ...state, todosToUpdate };
+      return { ...state, todos: todosToUpdate };
 
     case Actions.DELETE_TODOS:
       const todosToDelete = [ ...state.todos ];

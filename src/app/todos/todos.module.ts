@@ -13,11 +13,13 @@ import { todosReducer } from './store/todos.reducer';
 import { BreadcumbComponent } from './home/breadcumb/breadcumb.component';
 import { TodosListComponent } from '../todos/todo/todos-list/todos-list.component';
 import { TodosService } from './services/todos.service';
+import { TodoEditRowComponent } from './todo/todo-edit-row/todo-edit-row.component';
 
 const COMPONENTS = [
   TodoComponent,
   TodoformComponent,
-  HomeComponent
+  HomeComponent,
+  TodoEditRowComponent
 ];
 
 @NgModule({
