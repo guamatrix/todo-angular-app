@@ -1,8 +1,8 @@
 <div class="editable-cell">
     <div class="editable-cell-text-wrapper" [formGroup]="formUpdate" style="display: flex">
       <ng-container *ngIf="!isEdit">
-        <td>{{ todo[name] }}</td>
-        <i class="anticon anticon-edit editable-cell-icon" (click)="toogleEdit()"></i>
+        <td><span [ngClass]="{ completed: todo.completed }">{{ todo[name] }}</span></td>
+        <i *ngIf="!todo.completed" class="anticon anticon-edit editable-cell-icon" (click)="toogleEdit()"></i>
       </ng-container>
       <ng-container *ngIf="isEdit">
         <input type="text" nz-input [formControlName]="name">

@@ -36,7 +36,7 @@ export class TodosService {
     }
   }
 
-  async deleteTodos(id: number, index: number) {
+  async deleteTodos(id: string, index: number) {
     this.store.dispatch(new SelectedTodos(index));
     const url = `${prefix}/${id}`;
     try {
@@ -54,7 +54,6 @@ export class TodosService {
     const url = `${prefix}/${id}`;
     try {
       const result = await this.http.patch<ResponseTodos>(url, todo).toPromise();
-      console.log(result);
       this.store.dispatch(new UpdateTodos(result.todo));
       this.store.dispatch(new SelectedTodos(-1));
     } catch (error) {
