@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
       switchMap((user: User) => {
         if (user) {
           const copiedReq = req.clone({
-            headers: req.headers.append('x-auth', user.token['x-auth'] + '45465')
+            headers: req.headers.append('x-auth', user.token['x-auth'])
           });
           return next.handle(copiedReq);
         }

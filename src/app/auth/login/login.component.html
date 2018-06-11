@@ -8,7 +8,7 @@
         <nz-form-label [nzFor]="field.name" [nzRequired]="field.required">{{ field.label }}</nz-form-label>
         <nz-form-control>
           <nz-input-group nxPrefixIcon="anticon" anticon-user>
-            <input type="text" nz-input [formControlName]="field.name" [placeholder]="field.placeholder">
+            <input [type]="field.type" autocomplete="current-password" nz-input [formControlName]="field.name" [placeholder]="field.placeholder">
           </nz-input-group>
           <nz-form-explain *ngIf="authForm.get(field.name).errors && authForm.get(field.name).dirty">{{ authForm.get(field.name).errors | errors }}</nz-form-explain>
         </nz-form-control>

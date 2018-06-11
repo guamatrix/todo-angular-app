@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       ]
     },
     { id: 'todos', title: 'Todos', icon: 'anticon anticon-file', child: [
-      { title: 'My Todos', link: 'todos' },
-      { title: 'New Todos', link: 'todos/new' },
+      { title: 'My Todos', link: '/home/todos' },
+      { title: 'New Todos', link: '/home/todos/new' },
     ]
   },
 ];
@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subs.push(
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         this.urlPaths = event.url.slice(1).split('/');
-        console.log(this.urlPaths);
       })
     );
   }

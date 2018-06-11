@@ -16,8 +16,8 @@ import { getIsLoading } from '../../app.reducer';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   FIELDS = [
-    { label: 'E-mail', name: 'email', placeholder: 'Email', required: true },
-    { label: 'Password', name: 'password', placeholder: 'Password', required: true }
+    { label: 'E-mail', name: 'email', placeholder: 'Email', required: true, type: 'text' },
+    { label: 'Password', name: 'password', placeholder: 'Password', required: true, type: 'password' }
   ];
 
   authForm: FormGroup;

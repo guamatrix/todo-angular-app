@@ -11,6 +11,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
 
 import { todosReducer } from './store/todos.reducer';
 import { BreadcumbComponent } from './home/breadcumb/breadcumb.component';
+import { TodosListComponent } from '../todos/todo/todos-list/todos-list.component';
+import { TodosService } from './services/todos.service';
 
 const COMPONENTS = [
   TodoComponent,
@@ -19,7 +21,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, BreadcumbComponent],
+  declarations: [COMPONENTS, BreadcumbComponent, TodosListComponent],
   imports: [
     TodoRoutingModule,
     SharedModule,
@@ -27,7 +29,8 @@ const COMPONENTS = [
   ],
   exports: [],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    TodosService
   ]
 })
 export class TodoModule {}

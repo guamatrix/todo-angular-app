@@ -1,10 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import memo from 'memo-decorator';
+
 @Pipe({
-  name: 'errors'
+  name: 'errors',
+  pure: true
 })
 export class ErrorsPipe implements PipeTransform {
-
+  @memo()
   transform(errors: any ): string {
     if ('required' in errors) {
       return 'Required';

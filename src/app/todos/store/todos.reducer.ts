@@ -13,7 +13,7 @@ export function todosReducer(state = initialState, action: Actions.TodosActions)
   switch (action.type) {
     case Actions.ADD_TODOS:
       const todosToAdd = [ ...state.todos, action.payload ];
-      return { ...state, todosToAdd };
+      return { ...state, todos: todosToAdd };
 
     case Actions.SET_TODOS:
       return { ...state, todos: action.payload };

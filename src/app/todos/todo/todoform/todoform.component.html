@@ -1,4 +1,21 @@
-<p>
-  todoform works!
-</p>
-<a routerLink="../">back</a>
+<nz-layout style="height: 100%;" nz-row nzType="flex" nzJustify="center" nzAlign="middle">
+  <nz-card style="width: 100%">
+    <div nz-row nzJustify="center">
+      <h3>New Todos</h3>
+    </div>
+    <form nz-form (ngSubmit)="onSubmit()" [formGroup]="todosForm">
+      <nz-form-item>
+        <nz-form-label nzFor="text" nzRequired>Todo</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzSearch nzSize="medium" [nzSuffix]="suffixButton">
+            <input type="text" name="text" formControlName="text" nz-input placeholder="Write a todo">
+            <nz-form-explain *ngIf="todosForm.get('text').errors && todosForm.get('text').dirty">{{ todosForm.get('text').errors | errors }}</nz-form-explain>
+          </nz-input-group>
+          <ng-template #suffixButton>
+              <button nz-button nzType="primary" type="submit" nzSize="medium" nzSearch>Add</button>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-card>
+</nz-layout>

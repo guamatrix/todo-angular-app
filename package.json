@@ -22,6 +22,7 @@
     "@angular/router": "^6.0.2",
     "@ngrx/store": "^6.0.1",
     "core-js": "^2.5.4",
+    "memo-decorator": "^1.0.2",
     "ng-zorro-antd": "^0.7.1",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.0",
