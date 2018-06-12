@@ -10,7 +10,6 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
 import { AuthService } from '../auth/services/auth.service';
-import { LoadingInterceptor } from '../shared/services/loading.interceptor';
 import { CoreRoutingModule } from './core-routing.module';
 import { TodoModule } from '../todos/todos.module';
 
@@ -21,7 +20,7 @@ const MODULE = [
   SharedModule,
   AuthModule,
   TodoModule,
-  CoreRoutingModule,
+  CoreRoutingModule
 ];
 
 @NgModule({

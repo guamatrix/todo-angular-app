@@ -14,16 +14,24 @@ import { BreadcumbComponent } from './home/breadcumb/breadcumb.component';
 import { TodosListComponent } from '../todos/todo/todos-list/todos-list.component';
 import { TodosService } from './services/todos.service';
 import { TodoEditRowComponent } from './todo/todo-edit-row/todo-edit-row.component';
+import { ChangePassComponent } from './user/change-pass/change-pass.component';
+import { UserComponent } from './user/user.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 const COMPONENTS = [
   TodoComponent,
   TodoformComponent,
   HomeComponent,
-  TodoEditRowComponent
+  TodoEditRowComponent,
+  ChangePassComponent,
+  UserFormComponent,
+  UserComponent,
+  BreadcumbComponent,
+  TodosListComponent
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, BreadcumbComponent, TodosListComponent],
+  declarations: [COMPONENTS],
   imports: [
     TodoRoutingModule,
     SharedModule,

@@ -12,8 +12,8 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HomeComponent implements OnInit, OnDestroy {
   menuList = [
     { id: 'user', title: 'User', icon: 'anticon anticon-user', child: [
-        { title: 'My Info', onClick: null },
-        { title: 'Change Pass', onClick: null },
+        { title: 'My Info', link: '/home/user' },
+        { title: 'Change Pass', link: '/home/user/change-pass' },
         { title: 'Logout', onClick: this.onLogout.bind(this) }
       ]
     },

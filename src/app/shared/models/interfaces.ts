@@ -3,6 +3,12 @@ export interface AuthAccessModel {
   password: string;
 }
 
+export interface ChangePassModel {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export interface Token {
   [key: string]: string;
 }

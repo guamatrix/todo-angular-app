@@ -4,11 +4,13 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { AuthAccessModel, Token } from '../../shared/models/interfaces';
+import { AuthAccessModel, ChangePassModel, Token } from '../../shared/models/interfaces';
 import { State } from '../../shared/models/States';
 import { SetLoading, SetAuth } from '../../shared/store/shared.actions';
 import { User } from '../../shared/models/interfaces';
 import { environment } from '../../../environments/environment';
+import { NzMessageService } from 'ng-zorro-antd';
+import { TodosService } from '../../todos/services/todos.service';
 
 const URL_BASE = environment.BASE_URL;
 
@@ -16,7 +18,9 @@ const URL_BASE = environment.BASE_URL;
 export class AuthService {
   constructor( private http: HttpClient,
     private store: Store<State>,
-    private route: Router) {}
+    private route: Router,
+    private messageService: NzMessageService,
+    private todosService: TodosService) {}
 
   registerUser(credentials: AuthAccessModel) {
     const url = `${URL_BASE}/users`;
@@ -35,6 +39,17 @@ export class AuthService {
     this.route.navigate(['home/todos']);
   }
 
+  async changePass(body: ChangePassModel) {
+    const url = `${URL_BASE}/users/me/change-password`;
+    try {
+      await this.http.post(url, body).toPromise();
+      this.messageService.create('success', 'Pass Changed!');
+      this.route.navigate(['home/todos']);
+    } catch (error) {
+      this.todosService.showError(error);
+    }
+  }
+
   private generateTokenByHeaders(headers): Token {
     return { 'x-auth': headers.get('x-auth') };
   }
@@ -46,7 +61,7 @@ export class AuthService {
         this.store.dispatch(new SetAuth(null));
         this.route.navigate(['login']);
       }, error => {
-        console.log(error);
+        this.todosService.showError(error);
       }
     );
   }
