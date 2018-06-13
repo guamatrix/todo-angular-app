@@ -3,6 +3,13 @@ import _ from 'lodash';
 
 import { TodosActionsTypes, TodosActions } from './todos.acttions';
 import { State } from '../models/state';
+import { } from '@ngrx/entity';
+import { Todos } from '../models/interfaces';
+
+// interface EntityState {
+//   ids: string[] | number [];
+//   entities: { [id: string]: Todos }
+// }
 
 const initialState: State = {
   todos: {}

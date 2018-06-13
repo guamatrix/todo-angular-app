@@ -1,4 +1,4 @@
-import * as Actions from './shared.actions';
+import { SharedActionsTypes, SharedActions } from './shared.actions';
 
 import { SharedState } from '../models/States';
 import { LocalStorage } from './LocalStorage';
@@ -8,14 +8,15 @@ const initialState: SharedState = {
   auth: LocalStorage.loadAuth()
 };
 
-export function sharedReducer(state = initialState, action: Actions.SharedActions) {
+export function sharedReducer(state = initialState, action: SharedActions) {
   switch (action.type) {
-    case Actions.SET_LOADING:
+    case SharedActionsTypes.SET_LOADING:
       return { ...state, loading: action.payload };
 
-    case Actions.SET_AUTH:
+    case SharedActionsTypes.SET_AUTH:
       LocalStorage.saveAuth(action.payload);
       return { ...state, auth: action.payload };
+
     default:
       return state;
   }
