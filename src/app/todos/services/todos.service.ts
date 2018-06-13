@@ -4,7 +4,7 @@ import { TodosState } from '../models/state';
 import { Todos, ResponseTodos } from '../models/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { SetTodos, AddTodos, UpdateTodos, DeleteTodos, SelectedTodos } from '../store/todos.acttions';
+import { SetTodos, AddTodos, UpdateTodos, DeleteTodos } from '../store/todos.acttions';
 import { Router } from '@angular/router';
 import { NzMessageService, NzNotificationService } from 'ng-zorro-antd';
 
@@ -43,31 +43,25 @@ export class TodosService {
     }
   }
 
-  async deleteTodos(id: string, index: number) {
-    this.store.dispatch(new SelectedTodos(index));
+  async deleteTodos(id: string) {
     const url = `${prefix}/${id}`;
     try {
       const result = await this.http.delete(url).toPromise();
       this.messageService.create('success', 'Todo deleted!');
-      this.store.dispatch(new DeleteTodos());
-      this.store.dispatch(new SelectedTodos(-1));
+      this.store.dispatch(new DeleteTodos(id));
     } catch (error) {
-      this.store.dispatch(new SelectedTodos(-1));
       this.showError(error);
       console.log(error);
     }
   }
 
-  async updateTodo(todo, index: number, id: string) {
-    this.store.dispatch(new SelectedTodos(index));
+  async updateTodo(todo, id: string) {
     const url = `${prefix}/${id}`;
     try {
       const result = await this.http.patch<ResponseTodos>(url, todo).toPromise();
       this.store.dispatch(new UpdateTodos(result.todo));
       this.messageService.create('success', 'Todo updated!');
-      this.store.dispatch(new SelectedTodos(-1));
     } catch (error) {
-      this.store.dispatch(new SelectedTodos(-1));
       this.showError(error);
       console.log('error', error);
     }

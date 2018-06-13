@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Todos } from '../../models/interfaces';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { TodosService } from '../../services/todos.service';
@@ -11,7 +11,6 @@ import { TodosService } from '../../services/todos.service';
 export class TodoEditRowComponent implements OnInit {
   @Input()name: string;
   @Input()todo: Todos;
-  @Input()index: number;
 
   isEdit = false;
   formUpdate: FormGroup;
@@ -24,12 +23,15 @@ export class TodoEditRowComponent implements OnInit {
 
   toogleEdit() {
     this.isEdit = !this.isEdit;
+    if (!this.isEdit) {
+      this.formUpdate.setValue({ [this.name]: this.todo.text });
+    }
   }
 
   async onUpdate() {
     if (!this.formUpdate.invalid) {
       const body = this.formUpdate.value;
-      await this.todosService.updateTodo(body, this.index, this.todo._id);
+      await this.todosService.updateTodo(body, this.todo._id);
       this.toogleEdit();
     }
   }

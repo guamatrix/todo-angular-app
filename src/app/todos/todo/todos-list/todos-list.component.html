@@ -8,15 +8,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let todo of nzTable.data; let i = index">
-        <td><app-todo-edit-row [todo]="todo" [index]="i" name="text"></app-todo-edit-row></td>
+      <tr *ngFor="let todo of nzTable.data;">
+        <td><app-todo-edit-row [todo]="todo" name="text"></app-todo-edit-row></td>
         <td> {{ todo.completed}} </td>
         <td> {{ todo.completedAt | date }} </td>
         <td class="icons">
-          <nz-popconfirm *ngIf="!todo.completed" nzTitle="Sure to complete?" (nzOnConfirm)="completeTodo(todo._id, i)">
+          <nz-popconfirm *ngIf="!todo.completed" nzTitle="Sure to complete?" (nzOnConfirm)="completeTodo(todo._id)">
             <a nz-popconfirm><i nzTitle="prompt text" class="anticon anticon-check-circle-o"></i></a>
           </nz-popconfirm>
-          <nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="deleteTodo(todo._id, i)">
+          <nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="deleteTodo(todo._id)">
               <a nzTitle="prompt text" nz-popconfirm><i  role="button" class="anticon anticon-delete"></i></a>
           </nz-popconfirm>
         </td>

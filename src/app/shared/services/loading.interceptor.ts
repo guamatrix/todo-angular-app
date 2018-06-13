@@ -20,7 +20,7 @@ export class LoadingInterceptor implements HttpInterceptor {
           this.store.dispatch(new SetLoading(false));
         }
       },
-      error => {
+      () => {
         // renewtoken
         this.store.dispatch(new SetLoading(false));
       }

@@ -15,12 +15,12 @@ export class TodosListComponent implements OnInit {
 
   }
 
-  deleteTodo(id: string, index: number) {
-    this.todosService.deleteTodos(id, index);
+  deleteTodo(id: string) {
+    this.todosService.deleteTodos(id);
   }
 
-  completeTodo(id: string, index: number) {
-    this.todosService.updateTodo({ completed: true }, index, id);
+  completeTodo(id: string) {
+    this.todosService.updateTodo({ completed: true }, id);
   }
 
 }

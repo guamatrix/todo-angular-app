@@ -1,39 +1,35 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import _ from 'lodash';
 
-import * as Actions from './todos.acttions';
-import { State, TodosState } from '../models/state';
-import { Todos } from '../models/interfaces';
+import { TodosActionsTypes, TodosActions } from './todos.acttions';
+import { State } from '../models/state';
 
 const initialState: State = {
-  todos: [],
-  selectedTodos: -1
+  todos: {}
 };
 
-export function todosReducer(state = initialState, action: Actions.TodosActions) {
+export function todosReducer(state = initialState, action: TodosActions) {
   switch (action.type) {
-    case Actions.ADD_TODOS:
-      const todosToAdd = [ ...state.todos, action.payload ];
+    case TodosActionsTypes.ADD_TODOS:
+      const todosToAdd = { ...state.todos };
+      todosToAdd[action.payload._id] = action.payload;
       return { ...state, todos: todosToAdd };
 
-    case Actions.SET_TODOS:
-      return { ...state, todos: action.payload };
+    case TodosActionsTypes.SET_TODOS:
+      const todos = _.keyBy(action.payload, '_id');
+      return { ...state, todos };
 
-    case Actions.INIT_TODOS:
+    case TodosActionsTypes.INIT_TODOS:
       return { ...state, todos: initialState };
 
-    case Actions.UPDATE_TODOS:
-      const todosToUpdate = [ ...state.todos ];
-      todosToUpdate[state.selectedTodos] = action.payload;
+    case TodosActionsTypes.UPDATE_TODOS:
+      const todosToUpdate = { ...state.todos };
+      todosToUpdate[action.payload._id] = action.payload;
       return { ...state, todos: todosToUpdate };
 
-    case Actions.DELETE_TODOS:
-      const todosToDelete = [ ...state.todos ];
-      todosToDelete.splice(state.selectedTodos, 1);
-      return { ...state, todos: todosToDelete };
-
-    case Actions.SELECTED_TODOS:
-      return { ...state, selectedTodos: action.payload };
+    case TodosActionsTypes.DELETE_TODOS:
+      const todosToDelete = { ...state.todos };
+      return { ...state, todos: _.omit(todosToDelete, action.payload) };
 
     default:
       return state;
@@ -41,6 +37,13 @@ export function todosReducer(state = initialState, action: Actions.TodosActions)
 }
 
 export const getTodosState = createFeatureSelector<State>('todosState');
-export const getTodos = createSelector(getTodosState, (state: State) => _.orderBy(state.todos, ['_id'], ['desc']));
-export const getSelectedTodos = createSelector(getTodosState, (state: State) => state.selectedTodos);
-export const isSelectedTodos = createSelector(getTodosState, (state: State) => state.selectedTodos !== -1);
+export const getTodos = createSelector(getTodosState, (state: State) =>
+  Object.keys(state.todos)
+    .map(key => state.todos[key])
+    .sort((a, b) => {
+      if (a._id > b._id) {
+        return -1;
+      }
+      return 1;
+    })
+);
