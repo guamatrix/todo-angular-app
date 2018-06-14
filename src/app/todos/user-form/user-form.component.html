@@ -1,3 +1,22 @@
-<p>
-  user-form works!
-</p>
+<form (ngSubmit)="onSubmit()" [formGroup]="formUser">
+  <div nz-row>
+    <div nz-col nzSpan="12" *ngFor="let field of fields">
+      <nz-form-item>
+        <nz-form-label [nzFor]="field.name" nzRequired>{{ field.label }}</nz-form-label>
+        <nz-form-control>
+          <nz-input-group *ngIf="field.type === 'text'; else calendar">
+            <input nz-input type="text" [name]="" [placeholder]="field.placeholder" [formControlName]="field.name">
+          </nz-input-group>
+          <ng-template #calendar>
+            <nz-date-picker [formControlName]="field.name" nzFormat="yyyy/MM/dd">
+            </nz-date-picker>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row nzJustify="end" nzType="flex">
+    <button type="button" nz-button nzSize="medium" (click)="onCancel()">Cancel</button>
+    <button nz-button nzType="primary" type="submit" nzSize="medium" nzSearch>Submit</button>
+  </div>
+</form>

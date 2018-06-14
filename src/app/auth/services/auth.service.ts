@@ -11,6 +11,7 @@ import { User } from '../../shared/models/interfaces';
 import { environment } from '../../../environments/environment';
 import { NzMessageService } from 'ng-zorro-antd';
 import { TodosService } from '../../todos/services/todos.service';
+import { Observable } from 'rxjs';
 
 const URL_BASE = environment.BASE_URL;
 
@@ -42,12 +43,27 @@ export class AuthService {
   async changePass(body: ChangePassModel) {
     const url = `${URL_BASE}/users/me/change-password`;
     try {
-      await this.http.post(url, body).toPromise();
+      await this.http.patch(url, body).toPromise();
       this.messageService.create('success', 'Pass Changed!');
       this.route.navigate(['home/todos']);
     } catch (error) {
       this.todosService.showError(error);
     }
+  }
+
+  async updateUser(body) {
+    const url = `${URL_BASE}/users/me`;
+    try {
+      const user = await this.http.patch(url, body).toPromise();
+      return user;
+    } catch (error) {
+      this.todosService.showError(error);
+    }
+  }
+
+  getUserInfo(): Observable<User> {
+    const url = `${URL_BASE}/users/me`;
+    return this.http.get<User>(url);
   }
 
   private generateTokenByHeaders(headers): Token {

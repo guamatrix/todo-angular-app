@@ -17,4 +17,7 @@ export interface User {
   _id: string;
   email: string;
   token?: Token;
+  firstName?: string;
+  lastName?: string;
+  birthDay?: Date;
 }

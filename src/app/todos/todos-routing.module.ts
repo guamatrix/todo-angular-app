@@ -8,20 +8,20 @@ import { TodoResolver } from './services/todo.resolver.service';
 import { ChangePassComponent } from './user/change-pass/change-pass.component';
 import { UserComponent } from './user/user.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserResolver } from './services/user.resolver.services';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard], resolve: { todos: TodoResolver }, children: [
     { path: 'home/todos', component: TodoComponent },
     { path: 'home/todos/new', component: TodoformComponent },
-    { path: 'home/user', component: UserComponent },
-    { path: 'home/user/change-pass', component: ChangePassComponent },
-    { path: 'home/user/update', component: UserFormComponent },
+    { path: 'home/user', component: UserComponent, resolve: { user: UserResolver } },
+    { path: 'home/user/change-pass', component: ChangePassComponent }
   ]}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard, TodoResolver]
+  providers: [AuthGuard, TodoResolver, UserResolver]
 })
 export class TodoRoutingModule {}

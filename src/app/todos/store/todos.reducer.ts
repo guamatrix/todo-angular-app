@@ -25,6 +25,7 @@ export function todosReducer(state = initialState, action: TodosActions) {
     case TodosActionsTypes.SET_TODOS:
       const todos = _.keyBy(action.payload, '_id');
       return { ...state, todos };
+      // return { ...state, todos: action.payload };
 
     case TodosActionsTypes.INIT_TODOS:
       return { ...state, todos: initialState };
@@ -44,6 +45,7 @@ export function todosReducer(state = initialState, action: TodosActions) {
 }
 
 export const getTodosState = createFeatureSelector<State>('todosState');
+// export const getTodos = createSelector(getTodosState, (state: State) => state.todos);
 export const getTodos = createSelector(getTodosState, (state: State) =>
   Object.keys(state.todos)
     .map(key => state.todos[key])

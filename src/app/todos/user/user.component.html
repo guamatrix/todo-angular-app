@@ -1,3 +1,11 @@
-<p>
-  user works!
-</p>
+<div nzType="flex" nzJustify="center" nzAlign="middle" nz-row>
+  <nz-card nzTitle="User" nz-col nzSpan="12" [nzExtra]="extra">
+    <app-user-info *ngIf="!isUpdate else formUser" [user]="user"></app-user-info>
+    <ng-template #formUser>
+        <app-user-form (cancel)="toggleUpdate()" [(user)]="user"></app-user-form>
+    </ng-template>
+    <ng-template #extra >
+      <a *ngIf="!isUpdate" (click)="toggleUpdate()"><i class="anticon anticon-edit"></i></a>
+    </ng-template>
+  </nz-card>
+</div>

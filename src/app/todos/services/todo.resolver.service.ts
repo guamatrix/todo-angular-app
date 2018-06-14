@@ -10,8 +10,7 @@ import { TodosService } from './todos.service';
 
 @Injectable()
 export class TodoResolver implements Resolve<any> {
-  constructor(private http: HttpClient,
-    private router: Router,
+  constructor(private router: Router,
     private store: Store<TodosState>,
     private todosService: TodosService) {}
 
