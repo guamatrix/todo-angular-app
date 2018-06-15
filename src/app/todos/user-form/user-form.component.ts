@@ -15,7 +15,7 @@ const FIELDS = [
   styleUrls: ['./user-form.component.less']
 })
 export class UserFormComponent implements OnInit {
-  @Output() user: User;
+  @Input() user: User;
   @Output() cancel = new EventEmitter<void>();
   formUser: FormGroup;
   fields = FIELDS;
@@ -40,8 +40,7 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     if (!this.formUser.invalid) {
       const body = this.formUser.value;
-      this.authServices.updateUser(body).then((user: User) => {
-        this.user = user;
+      this.authServices.updateUser(body).then(() => {
         this.onCancel();
       });
     }

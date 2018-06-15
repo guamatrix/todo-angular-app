@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { AuthAccessModel, ChangePassModel, Token } from '../../shared/models/interfaces';
@@ -12,6 +12,7 @@ import { environment } from '../../../environments/environment';
 import { NzMessageService } from 'ng-zorro-antd';
 import { TodosService } from '../../todos/services/todos.service';
 import { Observable } from 'rxjs';
+import { SetUser } from '../../todos/store/todos.acttions';
 
 const URL_BASE = environment.BASE_URL;
 
@@ -54,8 +55,8 @@ export class AuthService {
   async updateUser(body) {
     const url = `${URL_BASE}/users/me`;
     try {
-      const user = await this.http.patch(url, body).toPromise();
-      return user;
+      const user = await this.http.patch<User>(url, body).toPromise();
+      this.store.dispatch(new SetUser(user));
     } catch (error) {
       this.todosService.showError(error);
     }
@@ -63,7 +64,10 @@ export class AuthService {
 
   getUserInfo(): Observable<User> {
     const url = `${URL_BASE}/users/me`;
-    return this.http.get<User>(url);
+    return this.http.get<User>(url).pipe(map((user: User) => {
+      this.store.dispatch(new SetUser(user));
+      return user;
+    }));
   }
 
   private generateTokenByHeaders(headers): Token {

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
 import { User } from '../../shared/models/interfaces';
+import { State } from '../models/state';
+import { getUser } from '../store/todos.reducer';
 
 @Component({
   selector: 'app-user',
@@ -8,16 +12,16 @@ import { User } from '../../shared/models/interfaces';
   styleUrls: ['./user.component.less']
 })
 export class UserComponent implements OnInit {
-  user: User;
+  user$: Observable<User>;
   isUpdate = false;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private store: Store<State>) { }
 
   toggleUpdate() {
     this.isUpdate = !this.isUpdate;
   }
 
   ngOnInit() {
-    this.user = this.route.snapshot.data.user;
+    this.user$ = this.store.pipe(select(getUser));
   }
 
 }

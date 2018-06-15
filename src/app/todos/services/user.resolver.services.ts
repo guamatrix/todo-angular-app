@@ -9,7 +9,6 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class UserResolver implements Resolve<User> {
   constructor(private authService: AuthService,
-    private router: Router,
     private todosService: TodosService) {}
 
   resolve(): Observable<User> {

@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Todos } from '../models/interfaces';
+import { User } from '../../shared/models/interfaces';
 
 export enum TodosActionsTypes {
   ADD_TODOS = '[TODOS] add todos',
@@ -7,7 +8,8 @@ export enum TodosActionsTypes {
   DELETE_TODOS = '[TODOS] delete todos',
   UPDATE_TODOS = '[TODOS] update todos',
   INIT_TODOS = '[TODOS] init todos',
-  SELECTED_TODOS = '[TODOS] selected todos'
+  SELECTED_TODOS = '[TODOS] selected todos',
+  SET_USER = '[TODOS] set user'
 }
 
 export class AddTodos implements Action {
@@ -35,4 +37,9 @@ export class InitTodos implements Action {
   readonly type = TodosActionsTypes.INIT_TODOS;
 }
 
-export type TodosActions = AddTodos | SetTodos | DeleteTodos | UpdateTodos | InitTodos;
+export class SetUser implements Action {
+  readonly type = TodosActionsTypes.SET_USER;
+  constructor(public payload: User) {}
+}
+
+export type TodosActions = AddTodos | SetTodos | DeleteTodos | UpdateTodos | InitTodos | SetUser;

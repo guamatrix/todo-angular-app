@@ -12,7 +12,8 @@ import { Todos } from '../models/interfaces';
 // }
 
 const initialState: State = {
-  todos: {}
+  todos: {},
+  user: null
 };
 
 export function todosReducer(state = initialState, action: TodosActions) {
@@ -25,7 +26,6 @@ export function todosReducer(state = initialState, action: TodosActions) {
     case TodosActionsTypes.SET_TODOS:
       const todos = _.keyBy(action.payload, '_id');
       return { ...state, todos };
-      // return { ...state, todos: action.payload };
 
     case TodosActionsTypes.INIT_TODOS:
       return { ...state, todos: initialState };
@@ -39,13 +39,15 @@ export function todosReducer(state = initialState, action: TodosActions) {
       const todosToDelete = { ...state.todos };
       return { ...state, todos: _.omit(todosToDelete, action.payload) };
 
+    case TodosActionsTypes.SET_USER:
+      return { ...state, user: action.payload };
+
     default:
       return state;
   }
 }
 
 export const getTodosState = createFeatureSelector<State>('todosState');
-// export const getTodos = createSelector(getTodosState, (state: State) => state.todos);
 export const getTodos = createSelector(getTodosState, (state: State) =>
   Object.keys(state.todos)
     .map(key => state.todos[key])
@@ -56,3 +58,4 @@ export const getTodos = createSelector(getTodosState, (state: State) =>
       return 1;
     })
 );
+export const getUser = createSelector(getTodosState, (state: State) => state.user);
