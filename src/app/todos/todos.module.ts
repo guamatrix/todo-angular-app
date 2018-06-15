@@ -16,7 +16,7 @@ import { TodosService } from './services/todos.service';
 import { TodoEditRowComponent } from './todo/todo-edit-row/todo-edit-row.component';
 import { ChangePassComponent } from './user/change-pass/change-pass.component';
 import { UserComponent } from './user/user.component';
-import { UserFormComponent } from './user-form/user-form.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
 
 const COMPONENTS = [

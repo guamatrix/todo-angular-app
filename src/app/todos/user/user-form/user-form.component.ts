@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { User } from '../../shared/models/interfaces';
-import { AuthService } from '../../auth/services/auth.service';
+import { User } from '../../../shared/models/interfaces';
+import { AuthService } from '../../../auth/services/auth.service';
 
 const FIELDS = [
   { name: 'firstName', label: 'First Name', placeholder: 'First name', type: 'text'},

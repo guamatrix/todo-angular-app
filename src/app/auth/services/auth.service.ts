@@ -57,6 +57,7 @@ export class AuthService {
     try {
       const user = await this.http.patch<User>(url, body).toPromise();
       this.store.dispatch(new SetUser(user));
+      this.messageService.create('success', 'User Updated!');
     } catch (error) {
       this.todosService.showError(error);
     }

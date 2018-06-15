@@ -7,9 +7,11 @@
           <nz-input-group *ngIf="field.type === 'text'; else calendar">
             <input nz-input type="text" [name]="" [placeholder]="field.placeholder" [formControlName]="field.name">
           </nz-input-group>
+          <nz-form-explain *ngIf="formUser.get(field.name).errors && formUser.get(field.name).dirty">{{ formUser.get(field.name).errors | errors }}</nz-form-explain>
           <ng-template #calendar>
             <nz-date-picker [formControlName]="field.name" nzFormat="yyyy/MM/dd">
             </nz-date-picker>
+            <!-- <nz-form-explain *ngIf="formUser.get(field.name).errors && formUser.get(field.name).dirty">{{ formUser.get(field.name).errors | errors }}</nz-form-explain> -->
           </ng-template>
         </nz-form-control>
       </nz-form-item>
@@ -17,6 +19,6 @@
   </div>
   <div nz-row nzJustify="end" nzType="flex">
     <button type="button" nz-button nzSize="medium" (click)="onCancel()">Cancel</button>
-    <button nz-button nzType="primary" type="submit" nzSize="medium" nzSearch>Submit</button>
+    <button [disabled]="formUser.invalid" nz-button nzType="primary" type="submit" nzSize="medium" nzSearch>Submit</button>
   </div>
 </form>
