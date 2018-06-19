@@ -5,17 +5,18 @@ import { CommonModule } from '@angular/common';
 import { ErrorsPipe } from './pipes/errors.pipe';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './services/loading.interceptor';
+import { ScrollDirective } from './scroll.directive';
 
 const MODULE = [
   FormsModule,
   CommonModule,
-  ReactiveFormsModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({
-  declarations: [ErrorsPipe],
+  declarations: [ErrorsPipe, ScrollDirective],
   imports: [MODULE, NgZorroAntdModule.forRoot()],
-  exports: [MODULE, NgZorroAntdModule, ErrorsPipe],
+  exports: [MODULE, NgZorroAntdModule, ErrorsPipe, ScrollDirective],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ]
