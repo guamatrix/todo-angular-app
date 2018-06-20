@@ -6,6 +6,8 @@ import { ErrorsPipe } from './pipes/errors.pipe';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './services/loading.interceptor';
 import { ScrollDirective } from './scroll.directive';
+import { FocusDirective } from './focus.directive';
+import { SubmitEnterDirective } from './submit-enter.directive';
 
 const MODULE = [
   FormsModule,
@@ -13,10 +15,16 @@ const MODULE = [
   ReactiveFormsModule
 ];
 
+const DIRECTIVES = [
+  ScrollDirective,
+  FocusDirective,
+  SubmitEnterDirective
+];
+
 @NgModule({
-  declarations: [ErrorsPipe, ScrollDirective],
+  declarations: [ErrorsPipe, DIRECTIVES],
   imports: [MODULE, NgZorroAntdModule.forRoot()],
-  exports: [MODULE, NgZorroAntdModule, ErrorsPipe, ScrollDirective],
+  exports: [MODULE, NgZorroAntdModule, ErrorsPipe, DIRECTIVES],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ]

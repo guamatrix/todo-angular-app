@@ -14,14 +14,17 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.store.dispatch(new SetLoading(true));
+    console.log('response');
     return next.handle(req).pipe(tap(
       (response: any) => {
+        console.log(response);
         if (response instanceof HttpResponse) {
           this.store.dispatch(new SetLoading(false));
         }
       },
-      () => {
+      (err) => {
         // renewtoken
+        console.log(err);
         this.store.dispatch(new SetLoading(false));
       }
     ));

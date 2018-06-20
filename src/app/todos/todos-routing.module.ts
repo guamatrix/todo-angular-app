@@ -7,7 +7,7 @@ import { AuthGuard } from './services/auth.guard.services';
 import { TodoResolver } from './services/todo.resolver.service';
 import { ChangePassComponent } from './user/change-pass/change-pass.component';
 import { UserComponent } from './user/user.component';
-import { UserFormComponent } from './user-form/user-form.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserResolver } from './services/user.resolver.services';
 
 const routes: Routes = [

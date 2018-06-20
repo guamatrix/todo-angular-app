@@ -5,7 +5,8 @@
         <i *ngIf="!todo.completed" class="anticon anticon-edit editable-cell-icon" (click)="toogleEdit()"></i>
       </ng-container>
       <ng-container *ngIf="isEdit">
-        <input type="text" nz-input [formControlName]="name">
+        <input (appEnterClick)="onUpdate()" type="text" nz-input [formControlName]="name">
+        <!-- <input [appSubmit]="onUpdate.bind(this)" type="text" nz-input [formControlName]="name"> -->
         <i class="anticon anticon-check editable-cell-icon-check icon-accept" (click)="onUpdate()"></i>
         <i class="anticon anticon-close editable-cell-icon-check icon-close" (click)="toogleEdit()"></i>
       </ng-container>

@@ -20,12 +20,12 @@
       </li>
     </ul>
   </nz-sider>
-  <nz-layout>
+  <nz-layout style="height: 100%;">
     <nz-header style="background: #fff; padding:0;"></nz-header>
-    <nz-content style="margin:0 16px; min-height: calc(100vh);">
+    <nz-content style="margin:0 16px;">
       <app-breadcumb [breadcumb]="urlPaths"></app-breadcumb>
       <div style="padding:24px; background: #fff;">
-        <div style="min-height: 80vh">
+        <div style="max-height: calc(100vh - 234px); min-height: calc(100vh - 234px)">
           <router-outlet></router-outlet>
         </div>
       </div>

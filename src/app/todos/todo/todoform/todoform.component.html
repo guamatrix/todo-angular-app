@@ -8,7 +8,7 @@
         <nz-form-label nzFor="text" nzRequired>Todo</nz-form-label>
         <nz-form-control>
           <nz-input-group nzSearch nzSize="medium" [nzSuffix]="suffixButton">
-            <input type="text" name="text" formControlName="text" nz-input placeholder="Write a todo">
+            <input appFocus type="text" name="text" formControlName="text" nz-input placeholder="Write a todo">
             <nz-form-explain *ngIf="todosForm.get('text').errors && todosForm.get('text').dirty">{{ todosForm.get('text').errors | errors }}</nz-form-explain>
           </nz-input-group>
           <ng-template #suffixButton>

@@ -41,4 +41,5 @@ export class TodoEditRowComponent implements OnInit {
       [this.name]: new FormControl(this.todo[this.name], { validators: [Validators.required]})
     });
   }
+
 }
